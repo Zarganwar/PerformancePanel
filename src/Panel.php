@@ -1,15 +1,15 @@
 <?php
 
-namespace MartinJirasek;
+namespace Zarganwar\PerformancePanel;
 
 use Tracy\IBarPanel;
 
 /**
- * Description of PerformancePanel
+ * Description of Panel
  *
  * @author Martin Jirasek
  */
-class PerformancePanel implements IBarPanel
+class Panel implements IBarPanel
 {
 
 	public function getPanel()
@@ -28,16 +28,16 @@ class PerformancePanel implements IBarPanel
 
 	protected function countBreakpoints()
 	{
-		return count(PerformanceRegister::getNames());
+		return count(Register::getNames());
 	}
 
 	protected function getRowsString()
 	{
 		$return = "<tr><th><b>Breakpoint</b></th><th>Current memory [MB]</th><th><b>Previous breakpoint</b></th><th>Memory from previous [MB]</th><th>Time from previous [ms]</th></tr>";
 		$previousName = null;
-		$memoryList = PerformanceRegister::getMemory();
-		$timeList = PerformanceRegister::getTime();
-		foreach (PerformanceRegister::getNames() as $name) {
+		$memoryList = Register::getMemory();
+		$timeList = Register::getTime();
+		foreach (Register::getNames() as $name) {
 			$memory = $time = null;
 			if ($previousName !== null) {
 				$memory = $memoryList[$name] - $memoryList[$previousName];

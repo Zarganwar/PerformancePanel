@@ -22,11 +22,11 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"MartinJirasek\\PerformancePanel\\": "src/"
+			"Zarganwar\\PerformancePanel\\": "src/"
 		},
 		"classmap": [
-			"src/PerformancePanel.php",
-			"src/PerformanceRegister.php"
+			"src/Panel.php",
+			"src/Register.php"
 		]
 	}
 }

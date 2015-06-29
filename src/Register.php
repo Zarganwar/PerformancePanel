@@ -1,13 +1,13 @@
 <?php
 
-namespace MartinJirasek;
+namespace Zarganwar\PerformancePanel;
 
 /**
- * Description of PerformanceRegister
+ * Description of Register
  *
  * @author Martin Jirasek
  */
-class PerformanceRegister
+class Register
 {
 
 	const BREAKPOINT_DEFAULT_NAME = 'BP_';
