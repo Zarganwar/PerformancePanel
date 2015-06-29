@@ -3,7 +3,7 @@
 namespace MartinJirasek;
 
 /**
- * Description of PerformanceWatcher
+ * Description of PerformanceRegister
  *
  * @author Martin Jirasek
  */
