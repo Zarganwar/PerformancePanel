@@ -1,5 +1,5 @@
 {
-	"name": "MartinJirasek/PerformancePanel",
+	"name": "zarganwar/performance-panel",
 	"type": "library",
 	"description": "Tracy panel",
 	"keywords": ["nette", "tracy", "panel", "performance"],
