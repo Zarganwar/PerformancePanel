@@ -16,8 +16,9 @@ class PerformancePanel implements IBarPanel
 	{
 		return ''
 				. '<h1>Performance between breakpoints</h1>'
-				. '<p>' . $this->getRowsString() . '</p>'
-				. '<p><b>Breakpoints count: ' . $this->countBreakpoints() . '</b></p>';
+				. '<p>'
+				. '<table>' . $this->getRowsString() . '<tr><th><b>Total breakpoints</b></th><th colspan="4">' . $this->countBreakpoints() . '</th></tr></table>'
+				. '</p>';
 	}
 
 	public function getTab()
@@ -32,20 +33,18 @@ class PerformancePanel implements IBarPanel
 
 	protected function getRowsString()
 	{
-		$return = '';
+		$return = "<tr><th><b>Breakpoint</b></th><th>Current memory [MB]</th><th><b>Previous breakpoint</b></th><th>Memory from previous [MB]</th><th>Time from previous [ms]</th></tr>";
 		$previousName = null;
 		$memoryList = PerformanceRegister::getMemory();
 		$timeList = PerformanceRegister::getTime();
 		foreach (PerformanceRegister::getNames() as $name) {
-			$return .= sprintf("<b>%s</b>: %s MB.", $name, $this->memoryToNumber($memoryList[$name]));
+			$memory = $time = null;
 			if ($previousName !== null) {
 				$memory = $memoryList[$name] - $memoryList[$previousName];
 				$time = $timeList[$name] - $timeList[$previousName];
-				$return .= sprintf(
-						" (from <b>%s</b>: %s MB, %s ms)", $previousName, $this->memoryToNumber($memory), $this->timeToNumber($time)
-				);
 			}
-			$return .= '<br>';
+			$row = "<tr><td><b>%s</b></td><td>%s</td><td><b>%s</b></td><td>%s</td><td>%s</td></tr>";
+			$return .= sprintf($row, $name, $this->memoryToNumber($memoryList[$name]), $previousName, $this->memoryToNumber($memory), $this->timeToNumber($time));
 			$previousName = $name;
 		}
 		return $return;
