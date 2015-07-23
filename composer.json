@@ -28,5 +28,10 @@
 			"src/Panel.php",
 			"src/Register.php"
 		]
-	}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.4-dev"
+		}
+	}	
 }

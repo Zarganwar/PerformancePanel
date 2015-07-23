@@ -36,7 +36,7 @@ class Register
 	 * @param string|null $name
 	 * @return string
 	 */
-	private static function getName($name = null)
+	public static function getName($name = null)
 	{
 		if ($name === null) {
 			$name = self::BREAKPOINT_DEFAULT_NAME . self::$breakpointCounter;
@@ -48,7 +48,7 @@ class Register
 		return $name;
 	}
 
-	private static function isNameUsed($name)
+	public static function isNameUsed($name)
 	{
 		return isset(self::$names[$name]);
 	}
