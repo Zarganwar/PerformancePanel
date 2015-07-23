@@ -6,9 +6,11 @@
  * @author Martin Jirásek <jertin@seznam.cz>
  */
 namespace RegisterTest;
+
 use Tester;
 use Tester\Assert;
 use \Zarganwar\PerformancePanel\Register;
+
 require_once __DIR__ . '/bootstrap.php';
 /**
  * @author Martin Jirásek <jertin@seznam.cz>
@@ -17,29 +19,18 @@ require_once __DIR__ . '/bootstrap.php';
 class RegisterTest extends Tester\TestCase
 {
 	protected function tearDown() {
-		parent::tearDown();
-		
+		parent::tearDown();		
 	}
 	
 	public function testAddBreakpointNamed()
 	{
-		Register::addBreakpoint('A1_-=');
-		$names = Register::getNames();
-		Assert::equal(array('A1_-=' => 'A1_-='), $names);
+		Register::add('A1');		
+		Register::add('A1');		
+		Register::add();
+		Register::add();		
+
+		Assert::equal(array('A1' => 'A1', 'A1_2' => 'A1_2', 'BP_3' => 'BP_3', 'BP_4' => 'BP_4'), Register::getNames());
 	}
-	public function testAddBreakpointNamedDuplicity()
-	{
-		Register::addBreakpoint('A1_-=');
-		Register::addBreakpoint('A1_-=');
-		$names = Register::getNames();
-		Assert::equal(array('A1_-=', 'A1_-=_1'), $names);
-	}
-	public function testAddBreakpointUnnamed()
-	{
-		Register::addBreakpoint();
-		Register::addBreakpoint();
-		$names = Register::getNames();
-		Assert::equal(array('BP_1', 'BP_2'), $names);
-	}
+
 }
 \run(new RegisterTest());
