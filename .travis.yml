@@ -1,36 +1,32 @@
 language: php
 
 php:
-  - 5.3.3
-  - 5.4
-  - 5.5
-  - 5.6
-  - hhvm
+    - 5.4
+    - 5.5
+    - 5.6
+    - 7.0
+    - hhvm
 
-env:
-    - PHP_BIN=php
-    - PHP_BIN=php-cgi
-    
 matrix:
     allow_failures:
-        - php: 5.6
+        - php: 7.0
         - php: hhvm
 
-    exclude:
-        - php: hhvm
-          env: PHP_BIN=php-cgi
+script:
+    - vendor/bin/tester tests -s -p php
+    - php temp/code-checker/src/code-checker.php --short-arrays
+
+after_failure:
+    # Print *.actual content
+    - for i in $(find tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
+
 before_script:
     # Install Nette Tester & Code Checker
     - travis_retry composer install --no-interaction --prefer-dist
     - travis_retry composer create-project nette/code-checker temp/code-checker ~2.5 --no-interaction
-    
-install:
-  - mkdir -p vendor/bin
-  - composer install --no-interaction --prefer-source
+  
+sudo: false
 
-script:
-    - vendor/bin/tester -p $PHP_BIN tests -s
-    - php temp/code-checker/src/code-checker.php --short-arrays
-
-after_failure:
-  - 'for i in $(find ./tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done'
+cache:
+    directories:
+        - $HOME/.composer/cache
