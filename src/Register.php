@@ -9,7 +9,7 @@ namespace Zarganwar\PerformancePanel;
  */
 class Register
 {
-
+	
 	const BREAKPOINT_DEFAULT_NAME = 'BP_';
 
 	private static $names = array();
@@ -30,6 +30,18 @@ class Register
 		self::$memory[$trueName] = memory_get_peak_usage();
 		self::$time[$trueName] = microtime(true);
 	}
+	
+	/**
+	 * Add breakpoint - addBreakpoint alias
+	 * @param string|null $name
+	 * @param string|null $enforceParent unsupported yet
+	 */
+	public static function add($name = null, $enforceParent = null)
+	{
+		self::addBreakpoint($name, $enforceParent);
+	}
+	
+	
 
 	/**
 	 *
