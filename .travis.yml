@@ -1,0 +1,18 @@
+language: php
+
+php:
+  - 5.3.3
+  - 5.4
+  - 5.5
+
+before_install:
+  - composer self-update
+
+install:
+  - mkdir -p vendor/bin
+  - composer install --no-interaction --prefer-source
+
+script: vendor/bin/tester -p php -c ./tests/php.ini-unix ./tests/
+
+after_failure:
+  - 'for i in $(find ./tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done'
