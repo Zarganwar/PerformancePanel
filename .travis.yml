@@ -4,11 +4,21 @@ php:
   - 5.3.3
   - 5.4
   - 5.5
+  - 5.6
+  - hhvm
 
 env:
     - PHP_BIN=php
     - PHP_BIN=php-cgi
- 
+    
+matrix:
+    allow_failures:
+        - php: 5.6
+        - php: hhvm
+
+    exclude:
+        - php: hhvm
+          env: PHP_BIN=php-cgi
 before_script:
     # Install Nette Tester & Code Checker
     - travis_retry composer install --no-interaction --prefer-dist
