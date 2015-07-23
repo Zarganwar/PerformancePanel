@@ -15,7 +15,7 @@ class Register
 	private static $names = array();
 	private static $memory = array();
 	private static $time = array();
-	private static $breakpointCounter = 0;
+	private static $breakpointCounter = 1;
 
 	/**
 	 * Add breakpoint
@@ -23,12 +23,12 @@ class Register
 	 * @param string|null $enforceParent unsupported yet
 	 */
 	public static function addBreakpoint($name = null, $enforceParent = null)
-	{
-		self::$breakpointCounter++;
+	{		
 		$trueName = self::getName($name);
 		self::$names[$trueName] = $trueName;
 		self::$memory[$trueName] = memory_get_peak_usage();
 		self::$time[$trueName] = microtime(true);
+		self::$breakpointCounter++;
 	}
 	
 	/**
