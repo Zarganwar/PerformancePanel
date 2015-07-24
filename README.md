@@ -1,7 +1,7 @@
 # PerformancePanel
 [![Build Status](https://travis-ci.org/Zarganwar/PerformancePanel.svg?branch=master)](https://travis-ci.org/Zarganwar/PerformancePanel)
 
-Tracy performance panel
+Tracy [nette/tracy](https://github.com/nette/tracy) performance panel
 
 ![](http://i57.tinypic.com/ot234i.png)
 
