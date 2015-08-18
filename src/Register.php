@@ -9,13 +9,15 @@ namespace Zarganwar\PerformancePanel;
  */
 class Register
 {
-	
-	const BREAKPOINT_DEFAULT_NAME = 'BP_';
+	const MEMORY_PEAK = 'memory_peak';
+	const MEMORY = 'memory';
+	const TIME = 'time';
+	const NAME = 'name';
 
-	private static $names = array();
-	private static $memory = array();
-	private static $time = array();
-	private static $breakpointCounter = 1;
+	const DEFAULT_BP_NAME = 'BP_';
+
+	public static $data = array();
+	public static $breakpointCounter = 1;
 
 	/**
 	 * Add breakpoint
@@ -23,14 +25,17 @@ class Register
 	 * @param string|null $enforceParent unsupported yet
 	 */
 	public static function addBreakpoint($name = null, $enforceParent = null)
-	{		
-		$trueName = self::getName($name);
-		self::$names[$trueName] = $trueName;
-		self::$memory[$trueName] = memory_get_peak_usage();
-		self::$time[$trueName] = microtime(true);
+	{
+		$safeName = self::getName($name);
+		self::$data[$safeName] = array(
+			self::NAME => $safeName,
+			self::MEMORY => memory_get_usage(),
+			self::MEMORY_PEAK => memory_get_peak_usage(),
+			self::TIME => microtime(true),
+		);
 		self::$breakpointCounter++;
 	}
-	
+
 	/**
 	 * Add breakpoint - addBreakpoint alias
 	 * @param string|null $name
@@ -40,8 +45,6 @@ class Register
 	{
 		self::addBreakpoint($name, $enforceParent);
 	}
-	
-	
 
 	/**
 	 *
@@ -51,7 +54,7 @@ class Register
 	public static function getName($name = null)
 	{
 		if ($name === null) {
-			$name = self::BREAKPOINT_DEFAULT_NAME . self::$breakpointCounter;
+			$name = self::DEFAULT_BP_NAME . self::$breakpointCounter;
 		} else {
 			if (self::isNameUsed($name)) {
 				$name = self::getName($name . '_' . self::$breakpointCounter);
@@ -62,22 +65,17 @@ class Register
 
 	public static function isNameUsed($name)
 	{
-		return isset(self::$names[$name]);
-	}
-
-	public static function getMemory()
-	{
-		return self::$memory;
-	}
-
-	public static function getTime()
-	{
-		return self::$time;
+		return isset(self::$data[$name]);
 	}
 
 	public static function getNames()
 	{
-		return self::$names;
+		return array_keys(self::$data);
+	}
+
+	public static function getData()
+	{
+		return self::$data;
 	}
 
 }
