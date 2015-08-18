@@ -1,3 +1,4 @@
 netbeans*.tmp
 /vendor/
 composer.lock
+/tests/output/
