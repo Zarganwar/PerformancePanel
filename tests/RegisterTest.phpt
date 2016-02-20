@@ -28,8 +28,13 @@ class RegisterTest extends Tester\TestCase
 		Register::add('A1');
 		Register::add();
 		Register::add();
-
-		Assert::equal(array('A1', 'A1_2', 'BP_3', 'BP_4'), Register::getNames());
+		Register::add('PARENT');
+		Register::add('CHILD', 'PARENT');
+		Register::add('NEXT');
+		
+		Assert::equal(array('A1', 'A1_2', 'BP_3', 'BP_4', 'PARENT', 'CHILD', 'NEXT'), Register::getNames());
+		Assert::equal('PARENT', Register::getParent('CHILD'));
+		Assert::equal(null, Register::getParent('NEXT'));
 	}
 
 }
