@@ -20,6 +20,8 @@ nette:
 </code></pre>
 ##Usage
 <pre><code>
-Zarganwar\PerformancePanel\Register::addBreakpoint('A');
-Zarganwar\PerformancePanel\Register::addBreakpoint('B');
+Zarganwar\PerformancePanel\Register::add('A');
+Zarganwar\PerformancePanel\Register::add('B');
+Zarganwar\PerformancePanel\Register::add('C', 'B'); 
+Zarganwar\PerformancePanel\Register::add('D');
 </code></pre>
