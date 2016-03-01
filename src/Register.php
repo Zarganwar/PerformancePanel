@@ -14,6 +14,7 @@ class Register
 	const TIME = 'time';
 	const NAME = 'name';
 	const PREVIOUS = 'previous';
+	const BACKTRACE = 'backtrace';
 
 	const DEFAULT_BP_NAME = 'BP_';
 
@@ -45,6 +46,10 @@ class Register
 			self::MEMORY_PEAK => memory_get_peak_usage(),
 			self::TIME => microtime(true),
 			self::PREVIOUS => $previous,
+<<<<<<< HEAD
+=======
+			self::BACKTRACE => debug_backtrace(),
+>>>>>>> Zarganwar/master
 		);
 	}
 
