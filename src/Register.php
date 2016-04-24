@@ -46,15 +46,12 @@ class Register
 			self::MEMORY_PEAK => memory_get_peak_usage(),
 			self::TIME => microtime(true),
 			self::PREVIOUS => $previous,
-<<<<<<< HEAD
-=======
 			self::BACKTRACE => debug_backtrace(),
->>>>>>> Zarganwar/master
 		);
 	}
 
 	/**
-	 *
+	 * 
 	 * @return int
 	 */
 	private static function countBreakpoints()
